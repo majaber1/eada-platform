@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="إعادة — نموذج تفاعلي ثنائي اللغة لتقييم مسارات إعادة التصدير والبيع والتوظيف والتدوير." />
+  <meta name="theme-color" content="#0d5b45" />
+  <meta property="og:title" content="إعادة | EADA" />
+  <meta property="og:description" content="Interactive circular-economy decision prototype for surplus assets and scrap." />
+  <meta property="og:type" content="website" />
+  <title>إعادة | EADA Circular Economy Prototype</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#mainContent" data-i18n="skipContent">انتقل إلى المحتوى</a>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" onclick="go('home'); return false;" aria-label="EADA home">
+      <div class="brand-mark">ع</div>
+      <div>
+        <strong>إعادة</strong>
+        <span>EADA</span>
+      </div>
+    </a>
+    <nav class="nav" id="mainNav" aria-label="Primary navigation">
+      <button onclick="go('home')" data-i18n="navHome">الرئيسية</button>
+      <button onclick="go('assess')" data-i18n="navAssess">قيّم أصلًا</button>
+      <button onclick="go('scrap')" data-i18n="navScrap">Scrap AI</button>
+      <button onclick="go('market')" data-i18n="navMarket">سوق الفرص</button>
+      <button onclick="go('dashboard')" data-i18n="navDashboard">لوحة التحكم</button>
+    </nav>
+    <div class="top-actions">
+      <button class="ghost menu-toggle" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" onclick="toggleMenu()"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
+      <button class="ghost" id="langBtn" type="button" onclick="toggleLang()" aria-label="Switch language">EN</button>
+      <button class="primary small" onclick="go('assess')" data-i18n="startNow">ابدأ الآن</button>
+    </div>
+  </header>
+
+  <main id="mainContent" tabindex="-1">
+    <section id="home" class="page active">
+      <div class="hero shell">
+        <div class="hero-copy">
+          <div class="eyebrow" data-i18n="eyebrow">منصة الاقتصاد الدائري والتجارة الذكية</div>
+          <h1 data-i18n="heroTitle">حوّل الفائض والمخزون والأصول إلى <span>قيمة جديدة</span></h1>
+          <p data-i18n="heroText">منصة سعودية ذكية تساعد الشركات والجهات على اختيار أفضل مسار: إعادة تصدير، إعادة بيع، إعادة توظيف، أو إعادة تدوير — بناءً على الربحية، الامتثال، السوق، واللوجستيات.</p>
+          <div class="hero-actions">
+            <button class="primary" onclick="go('assess')" data-i18n="assessAsset">قيّم أصلًا أو مخزونًا</button>
+            <button class="secondary" onclick="go('market')" data-i18n="browseOpp">استكشف الفرص</button>
+            <button class="secondary" onclick="go('scrap')" data-i18n="tryScrap">جرّب Scrap AI</button>
+          </div>
+          <div class="trust-row">
+            <div><strong>4</strong><span data-i18n="paths">مسارات قيمة</span></div>
+            <div><strong>AI</strong><span data-i18n="smartEngine">محرك قرار ذكي</span></div>
+            <div><strong>AR/EN</strong><span data-i18n="bilingual">ثنائي اللغة</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-card">
+            <img src="assets/reexport-saudi.jpg" alt="" width="1024" height="1024" fetchpriority="high">
+            <div class="visual-overlay">
+              <div>
+                <span data-i18n="marketSignal">إشارة سوقية</span>
+                <strong data-i18n="reexport149">إعادة التصدير ≈ 149 مليار ريال في 2025</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" data-i18n="how">كيف تعمل المنصة؟</div>
+            <h2 data-i18n="oneDecision">قرار واحد. أربع طرق لاستخراج القيمة.</h2>
+          </div>
+        </div>
+        <div class="grid four">
+          <article class="feature">
+            <div class="icon">↗</div>
+            <h3 data-i18n="reexport">إعادة التصدير</h3>
+            <p data-i18n="reexportDesc">تحليل قابلية التصدير، السوق المستهدف، المتطلبات، الشحن والهامش المتوقع.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">◉</div>
+            <h3 data-i18n="resale">إعادة البيع</h3>
+            <p data-i18n="resaleDesc">تحويل المخزون الراكد والأصول الفائضة إلى سيولة عبر سوق B2B.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">∞</div>
+            <h3 data-i18n="reuse">إعادة التوظيف</h3>
+            <p data-i18n="reuseDesc">مطابقة الأصل مع جهة أخرى تستطيع استخدامه بدل شراء أصل جديد.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">♻</div>
+            <h3 data-i18n="recycle">إعادة التدوير</h3>
+            <p data-i18n="recycleDesc">توجيه المواد أو الأصول غير الاقتصادية إلى معالج أو مصنع تدوير مناسب.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="shell section">
+        <div class="ai-panel">
+          <div>
+            <div class="eyebrow light" data-i18n="aiEngine">EADA AI Decision Engine</div>
+            <h2 data-i18n="aiQuestion">ماذا أفعل بهذه الأصول؟</h2>
+            <p data-i18n="aiText">أدخل وصف الأصل أو المخزون، الكمية، الحالة والتكلفة. يقارن المحرك بين السيناريوهات ويعطيك توصية مرتبة مع الأسباب والمخاطر.</p>
+            <button class="light-btn" onclick="go('assess')" data-i18n="tryEngine">جرّب المحرك</button>
+          </div>
+          <div class="flow">
+            <div data-i18n="flowAsset">أصل / مخزون</div><span>→</span>
+            <div data-i18n="flowAnalyze">تحليل AI</div><span>→</span>
+            <div data-i18n="flowRoute">أفضل مسار</div><span>→</span>
+            <div data-i18n="flowMatch">مطابقة مشترٍ / معالج</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="assess" class="page shell section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow" data-i18n="assessment">تقييم ذكي</div>
+          <h2 data-i18n="tellUs">أخبرنا ماذا لديك</h2>
+          <p data-i18n="assessIntro">هذه نسخة MVP تستخدم محرك نقاط محلي لتوضيح تجربة المنتج. لاحقًا يتم ربطه ببيانات السوق والـ AI الحقيقي.</p>
+        </div>
+      </div>
+
+      <div class="assess-layout">
+        <form id="assessmentForm" class="form-card" onsubmit="runAssessment(event)">
+          <label><span data-i18n="assetName">اسم الأصل / المنتج</span>
+            <input id="assetName" name="assetName" required maxlength="120" autocomplete="off" placeholder="مثال: أجهزة لابتوب شركات" />
+          </label>
+          <div class="two-col">
+            <label><span data-i18n="category">الفئة</span>
+              <select id="category">
+                <option value="electronics" data-i18n="electronics">إلكترونيات وتقنية</option>
+                <option value="industrial" data-i18n="industrial">معدات صناعية</option>
+                <option value="vehicles" data-i18n="vehicles">مركبات وقطع غيار</option>
+                <option value="materials" data-i18n="materials">مواد وخامات</option>
+                <option value="general" data-i18n="general">أخرى</option>
+              </select>
+            </label>
+            <label><span data-i18n="quantity">الكمية</span>
+              <input id="quantity" name="quantity" type="number" min="1" max="100000000" value="100" required inputmode="numeric" />
+            </label>
+          </div>
+          <div class="two-col">
+            <label><span data-i18n="condition">الحالة</span>
+              <select id="condition">
+                <option value="new" data-i18n="new">جديد</option>
+                <option value="good" selected data-i18n="good">مستخدم - جيد</option>
+                <option value="repair" data-i18n="repair">يحتاج إصلاح</option>
+                <option value="scrap" data-i18n="scrap">غير صالح للاستخدام</option>
+              </select>
+            </label>
+            <label><span data-i18n="unitValue">قيمة الوحدة التقديرية (ريال)</span>
+              <input id="unitValue" name="unitValue" type="number" min="0" max="1000000000" step="0.01" value="1200" required inputmode="decimal" />
+            </label>
+          </div>
+          <label><span data-i18n="goal">هدفك الرئيسي</span>
+            <select id="goal">
+              <option value="cash" data-i18n="cash">سيولة سريعة</option>
+              <option value="margin" data-i18n="margin">أعلى هامش</option>
+              <option value="sustainability" data-i18n="sustainability">الاستدامة وتقليل الهدر</option>
+              <option value="regional" data-i18n="regional">التوسع الإقليمي</option>
+            </select>
+          </label>
+          <label><span data-i18n="notes">ملاحظات</span>
+            <textarea id="notes" name="notes" rows="4" maxlength="1000" placeholder="العمر، الموديل، الموقع، وجود مشترين، قيود، إلخ"></textarea>
+          </label>
+          <button class="primary full" type="submit" data-i18n="analyze">حلّل أفضل مسار</button>
+        </form>
+
+        <div class="result-card" id="resultCard" aria-live="polite" aria-atomic="true">
+          <div class="empty-state">
+            <div class="pulse-logo">ع</div>
+            <h3 data-i18n="waiting">بانتظار بيانات الأصل</h3>
+            <p data-i18n="waitingDesc">سنقارن إعادة التصدير، البيع، التوظيف والتدوير ونرتب النتائج.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="scrap" class="page shell section">
+      <div class="section-head scrap-head">
+        <div>
+          <div class="eyebrow" data-i18n="scrapEyebrow">EADA Scrap AI</div>
+          <h2 data-i18n="scrapTitle">صوّر السكراب… واعرف قيمته وأفضل مسار له</h2>
+          <p data-i18n="scrapIntro">ارفع صورة، أدخل الوزن التقريبي وبعض المعلومات، وسيقدّم محرك MVP تقديرًا أوليًا لنوع المادة، النقاء، القيمة، وخيار البيع أو التدوير أو إعادة التصدير.</p>
+        </div>
+        <span class="beta-badge">BETA MVP</span>
+      </div>
+
+      <div class="scrap-layout">
+        <div class="scrap-upload-card">
+          <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Upload scrap image" onclick="document.getElementById('scrapImage').click()" onkeydown="handleDropKey(event)">
+            <input id="scrapImage" type="file" accept="image/*" hidden onchange="handleScrapImage(event)" />
+            <div id="scrapPreviewWrap" class="scrap-preview-wrap">
+              <div class="upload-icon">⌁</div>
+              <h3 data-i18n="uploadScrap">ارفع صورة السكراب</h3>
+              <p data-i18n="uploadHint">JPG / PNG — صورة واحدة كافية للنسخة التجريبية</p>
+              <button type="button" class="secondary" data-i18n="chooseImage">اختر صورة</button>
+            </div>
+          </div>
+
+          <div class="scrap-form-grid">
+            <label><span data-i18n="materialHint">نوع المادة إن كنت تعرفه</span>
+              <select id="scrapMaterial">
+                <option value="auto" data-i18n="autoDetect">دع المحرك يقدّر</option>
+                <option value="copper" data-i18n="copper">نحاس / كيابل</option>
+                <option value="aluminum" data-i18n="aluminum">ألمنيوم</option>
+                <option value="steel" data-i18n="steel">حديد / فولاذ</option>
+                <option value="ewaste" data-i18n="ewaste">نفايات إلكترونية</option>
+                <option value="battery" data-i18n="battery">بطاريات</option>
+                <option value="mixed" data-i18n="mixed">سكراب مختلط</option>
+              </select>
+            </label>
+            <label><span data-i18n="weightKg">الوزن التقريبي (كجم)</span>
+              <input id="scrapWeight" type="number" min="1" max="100000000" value="500" required inputmode="decimal" />
+            </label>
+            <label><span data-i18n="cleanliness">حالة الفرز / النظافة</span>
+              <select id="scrapClean">
+                <option value="clean" data-i18n="clean">مفروز ونظيف</option>
+                <option value="medium" selected data-i18n="medium">متوسط</option>
+                <option value="dirty" data-i18n="dirty">مختلط / ملوث</option>
+              </select>
+            </label>
+            <label><span data-i18n="scrapGoal">الهدف</span>
+              <select id="scrapGoal">
+                <option value="sell" data-i18n="sellFast">بيع سريع</option>
+                <option value="maximize" data-i18n="maximize">تعظيم القيمة</option>
+                <option value="export" data-i18n="exportRoute">بحث فرصة تصدير</option>
+                <option value="recycle" data-i18n="recycleCompliant">تدوير ملتزم</option>
+              </select>
+            </label>
+          </div>
+          <button class="primary full" type="button" onclick="analyzeScrap()" data-i18n="analyzeScrap">حلّل السكراب</button>
+          <p class="micro-note" data-i18n="scrapDisclaimer">مهم: هذا نموذج MVP توضيحي وليس فحصًا مخبريًا أو تسعيرًا ملزمًا. الإنتاج الحقيقي يحتاج نموذج رؤية حاسوبية وبيانات أسعار ومشترين محدثة.</p>
+        </div>
+
+        <div class="scrap-result-card" id="scrapResult" aria-live="polite" aria-atomic="true">
+          <div class="empty-state">
+            <div class="pulse-logo">♻</div>
+            <h3 data-i18n="scrapWaiting">بانتظار صورة وبيانات السكراب</h3>
+            <p data-i18n="scrapWaitingDesc">سنحوّل المدخلات إلى تقدير نوع، نقاء، قيمة، وتوصية تشغيلية.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section scrap-how">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" data-i18n="scrapFlowLabel">المسار المستهدف في النسخة الإنتاجية</div>
+            <h2 data-i18n="scrapFlowTitle">من الصورة إلى صفقة</h2>
+          </div>
+        </div>
+        <div class="scrap-flow">
+          <div><strong>1</strong><span data-i18n="sf1">صورة / فيديو</span></div>
+          <i>→</i>
+          <div><strong>2</strong><span data-i18n="sf2">تصنيف المادة</span></div>
+          <i>→</i>
+          <div><strong>3</strong><span data-i18n="sf3">Grade & Purity</span></div>
+          <i>→</i>
+          <div><strong>4</strong><span data-i18n="sf4">سعر وقيمة</span></div>
+          <i>→</i>
+          <div><strong>5</strong><span data-i18n="sf5">بيع / مزاد / تدوير / تصدير</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="market" class="page shell section">
+      <div class="section-head split">
+        <div>
+          <div class="eyebrow" data-i18n="marketplace">سوق الفرص</div>
+          <h2 data-i18n="discover">اكتشف قيمة جاهزة للتحرك</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Marketplace filters">
+          <button class="chip active" onclick="filterMarket('all', this)" data-i18n="all">الكل</button>
+          <button class="chip" onclick="filterMarket('reexport', this)" data-i18n="reexport">إعادة التصدير</button>
+          <button class="chip" onclick="filterMarket('resale', this)" data-i18n="resale">إعادة البيع</button>
+          <button class="chip" onclick="filterMarket('recycle', this)" data-i18n="recycle">إعادة التدوير</button>
+        </div>
+      </div>
+      <p class="demo-banner" data-i18n="demoMarket">بيانات السوق المعروضة أمثلة توضيحية وليست عروضًا حقيقية.</p>
+      <div id="marketGrid" class="grid three"></div>
+    </section>
+
+    <section id="dashboard" class="page shell section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow" data-i18n="dashboard">لوحة التحكم</div>
+          <h2 data-i18n="valueOverview">نظرة على القيمة المستردة</h2>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span data-i18n="assessments">التقييمات</span><strong id="statAssess">0</strong><small data-i18n="thisDevice">على هذا الجهاز</small></div>
+        <div class="stat"><span data-i18n="estimatedValue">القيمة المقدرة</span><strong id="statValue">0 ر.س</strong><small data-i18n="evaluatedAssets">للأصول المقيمة</small></div>
+        <div class="stat"><span data-i18n="topRoute">المسار الأكثر توصية</span><strong id="statRoute">—</strong><small data-i18n="decisionEngine">من محرك القرار</small></div>
+        <div class="stat"><span data-i18n="savedWaste">قيمة قابلة للاسترداد</span><strong id="statRecovery">0 ر.س</strong><small data-i18n="scenarioEstimate">تقدير سيناريو MVP</small></div>
+        <div class="stat"><span data-i18n="scrapAnalyses">تحليلات Scrap AI</span><strong id="statScrap">0</strong><small data-i18n="thisDevice">على هذا الجهاز</small></div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="panel">
+          <div class="panel-title">
+            <h3 data-i18n="recentAssessments">آخر التقييمات</h3>
+            <button class="ghost danger" type="button" onclick="clearHistory()" data-i18n="clear">مسح</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="routeMix">توزيع المسارات</h3>
+          <div id="routeBars" class="bars"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div>
+        <div class="brand footer-brand">
+          <div class="brand-mark">ع</div>
+          <div><strong>إعادة</strong><span>EADA</span></div>
+        </div>
+        <p data-i18n="footerText">Turn Surplus Into Value — منصة سعودية لتحويل الفائض إلى قيمة.</p>
+      </div>
+      <div>
+        <strong data-i18n="mvpLabel">نموذج عام v1.0</strong>
+        <p data-i18n="mvpText">واجهة عملية + محرك تقييم + سوق فرص + لوحة تحكم محلية.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

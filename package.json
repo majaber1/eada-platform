@@ -1,0 +1,8 @@
+{
+  "name": "eada-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilingual circular-economy decision prototype",
+  "scripts": {"serve": "npx --yes serve . -l 8080", "test": "node scripts/check.mjs"},
+  "license": "MIT"
+}

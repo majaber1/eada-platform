@@ -1,0 +1,17 @@
+{
+  "routes": [
+    "reexport",
+    "resale",
+    "reuse",
+    "recycle"
+  ],
+  "version": "0.2",
+  "status": "MVP prototype",
+  "note": "Demo opportunity data only",
+  "modules": [
+    "asset-assessment",
+    "marketplace",
+    "dashboard",
+    "scrap-ai"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "EADA Circular Economy Prototype",
+  "short_name": "EADA",
+  "description": "Bilingual circular-economy decision prototype for surplus assets and scrap.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#0d5b45",
+  "icons": [{"src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
