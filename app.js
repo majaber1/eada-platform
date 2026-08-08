@@ -2,6 +2,7 @@ const translations = {
   ar:{
     skipContent:"انتقل إلى المحتوى",
     demoMarket:"بيانات السوق المعروضة أمثلة توضيحية وليست عروضًا حقيقية.",
+    brandValueLabel:"قيمة قابلة للاسترداد",scenarioSignal:"إشارة سيناريو",bestRouteLabel:"المسار الأنسب",brandPromise:"من الفائض إلى قيمة قابلة للقياس",brandClarity:"وضوح القرار",brandTrust:"ثقة البيانات",brandMomentum:"حركة القيمة",
     navHome:"الرئيسية",navAssess:"قيّم أصلًا",navScrap:"Scrap AI",navMarket:"سوق الفرص",navDashboard:"لوحة التحكم",startNow:"ابدأ الآن",tryScrap:"جرّب Scrap AI",
     eyebrow:"منصة الاقتصاد الدائري والتجارة الذكية",heroTitle:'حوّل الفائض والمخزون والأصول إلى <span>قيمة جديدة</span>',
     heroText:"منصة سعودية ذكية تساعد الشركات والجهات على اختيار أفضل مسار: إعادة تصدير، إعادة بيع، إعادة توظيف، أو إعادة تدوير — بناءً على الربحية، الامتثال، السوق، واللوجستيات.",
@@ -23,6 +24,7 @@ const translations = {
   en:{
     skipContent:"Skip to content",
     demoMarket:"Marketplace data is illustrative and does not represent live listings.",
+    brandValueLabel:"Recoverable value",scenarioSignal:"Scenario signal",bestRouteLabel:"Best-fit route",brandPromise:"From surplus to measurable value",brandClarity:"Decision clarity",brandTrust:"Data confidence",brandMomentum:"Value in motion",
     navHome:"Home",navAssess:"Assess Asset",navScrap:"Scrap AI",navMarket:"Opportunity Market",navDashboard:"Dashboard",startNow:"Get Started",tryScrap:"Try Scrap AI",
     eyebrow:"Circular Economy & Smart Trade Platform",heroTitle:'Turn surplus, inventory and assets into <span>new value</span>',
     heroText:"A Saudi smart platform that helps organizations choose the best route: re-export, resale, redeployment, or recycling — based on profitability, compliance, market fit and logistics.",
@@ -96,6 +98,7 @@ function closeMenu(){document.getElementById("mainNav").classList.remove("open")
 function go(id){
   const target=document.getElementById(id);if(!target)return;
   document.querySelectorAll(".page").forEach(p=>{p.classList.remove("active");p.setAttribute("aria-hidden","true")});
+  document.querySelectorAll(".nav button").forEach(button=>button.classList.toggle("active",button.getAttribute("onclick")?.includes(`'${id}'`)));
   target.classList.add("active");target.removeAttribute("aria-hidden");closeMenu();
   window.history.replaceState(null,"",`#${id}`);window.scrollTo({top:0,behavior:"smooth"});
   if(id==="dashboard")renderDashboard();target.focus({preventScroll:true});

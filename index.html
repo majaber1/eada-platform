@@ -23,11 +23,7 @@
 
   <header class="topbar">
     <a class="brand" href="#home" onclick="go('home'); return false;" aria-label="EADA home">
-      <div class="brand-mark">ع</div>
-      <div>
-        <strong>إعادة</strong>
-        <span>EADA</span>
-      </div>
+      <img class="brand-logo" src="assets/logo-lockup.svg" alt="EADA — إعادة" width="310" height="72" />
     </a>
     <nav class="nav" id="mainNav" aria-label="Primary navigation">
       <button onclick="go('home')" data-i18n="navHome">الرئيسية</button>
@@ -47,7 +43,7 @@
     <section id="home" class="page active">
       <div class="hero shell">
         <div class="hero-copy">
-          <div class="eyebrow" data-i18n="eyebrow">منصة الاقتصاد الدائري والتجارة الذكية</div>
+          <div class="eyebrow brand-eyebrow"><span class="status-dot"></span><span data-i18n="eyebrow">منصة الاقتصاد الدائري والتجارة الذكية</span></div>
           <h1 data-i18n="heroTitle">حوّل الفائض والمخزون والأصول إلى <span>قيمة جديدة</span></h1>
           <p data-i18n="heroText">منصة سعودية ذكية تساعد الشركات والجهات على اختيار أفضل مسار: إعادة تصدير، إعادة بيع، إعادة توظيف، أو إعادة تدوير — بناءً على الربحية، الامتثال، السوق، واللوجستيات.</p>
           <div class="hero-actions">
@@ -57,7 +53,7 @@
           </div>
           <div class="trust-row">
             <div><strong>4</strong><span data-i18n="paths">مسارات قيمة</span></div>
-            <div><strong>AI</strong><span data-i18n="smartEngine">محرك قرار ذكي</span></div>
+            <div><strong>01</strong><span data-i18n="smartEngine">محرك قرار ذكي</span></div>
             <div><strong>AR/EN</strong><span data-i18n="bilingual">ثنائي اللغة</span></div>
           </div>
         </div>
@@ -71,6 +67,17 @@
               </div>
             </div>
           </div>
+          <div class="floating-card value-card"><span data-i18n="brandValueLabel">قيمة قابلة للاسترداد</span><strong>82%</strong><small data-i18n="scenarioSignal">إشارة سيناريو</small></div>
+          <div class="floating-card route-card-mini"><span class="mini-mark">↗</span><div><small data-i18n="bestRouteLabel">المسار الأنسب</small><strong data-i18n="reexport">إعادة التصدير</strong></div></div>
+        </div>
+      </div>
+
+      <div class="brand-ribbon">
+        <div class="shell brand-ribbon-inner">
+          <span data-i18n="brandPromise">من الفائض إلى قيمة قابلة للقياس</span>
+          <div><b>01</b><span data-i18n="brandClarity">وضوح القرار</span></div>
+          <div><b>02</b><span data-i18n="brandTrust">ثقة البيانات</span></div>
+          <div><b>03</b><span data-i18n="brandMomentum">حركة القيمة</span></div>
         </div>
       </div>
 
@@ -180,7 +187,7 @@
 
         <div class="result-card" id="resultCard" aria-live="polite" aria-atomic="true">
           <div class="empty-state">
-            <div class="pulse-logo">ع</div>
+            <img class="pulse-logo image-logo" src="assets/logo-mark.svg" alt="" width="72" height="72" />
             <h3 data-i18n="waiting">بانتظار بيانات الأصل</h3>
             <p data-i18n="waitingDesc">سنقارن إعادة التصدير، البيع، التوظيف والتدوير ونرتب النتائج.</p>
           </div>
@@ -248,7 +255,7 @@
 
         <div class="scrap-result-card" id="scrapResult" aria-live="polite" aria-atomic="true">
           <div class="empty-state">
-            <div class="pulse-logo">♻</div>
+            <img class="pulse-logo image-logo" src="assets/logo-mark.svg" alt="" width="72" height="72" />
             <h3 data-i18n="scrapWaiting">بانتظار صورة وبيانات السكراب</h3>
             <p data-i18n="scrapWaitingDesc">سنحوّل المدخلات إلى تقدير نوع، نقاء، قيمة، وتوصية تشغيلية.</p>
           </div>
@@ -328,10 +335,7 @@
   <footer>
     <div class="shell footer-grid">
       <div>
-        <div class="brand footer-brand">
-          <div class="brand-mark">ع</div>
-          <div><strong>إعادة</strong><span>EADA</span></div>
-        </div>
+        <div class="brand footer-brand"><img class="brand-logo" src="assets/logo-lockup.svg" alt="EADA — إعادة" width="310" height="72" /></div>
         <p data-i18n="footerText">Turn Surplus Into Value — منصة سعودية لتحويل الفائض إلى قيمة.</p>
       </div>
       <div>

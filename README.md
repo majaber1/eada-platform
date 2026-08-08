@@ -10,6 +10,8 @@ A polished bilingual (Arabic/English) interactive prototype for evaluating circu
 - Responsive RTL/LTR UI with keyboard and reduced-motion support
 - Installable manifest, release checks, and GitHub Pages deployment
 
+Identity usage, palette, typography, voice, and interface principles are documented in [BRAND.md](BRAND.md).
+
 ## Scope
 
 EADA is a decision-support prototype, not a live marketplace, certified inspection, laboratory analysis, or binding valuation. Scoring rules, prices, opportunities, and buyer flows are demonstration data. Images stay in the browser and records use local storage on the current device.

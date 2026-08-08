@@ -1,7 +1,7 @@
 import { access, readFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 
-const required = ["index.html", "styles.css", "app.js", "manifest.webmanifest", "robots.txt", "assets/favicon.svg", "assets/reexport-saudi.jpg"];
+const required = ["index.html", "styles.css", "app.js", "manifest.webmanifest", "robots.txt", "BRAND.md", "assets/favicon.svg", "assets/logo-mark.svg", "assets/logo-lockup.svg", "assets/reexport-saudi.jpg"];
 await Promise.all(required.map((file) => access(file)));
 const html = await readFile("index.html", "utf8");
 for (const marker of ["<html lang=", "meta name=\"description\"", "id=\"mainContent\"", "aria-live=\"polite\"", "manifest.webmanifest"]) {
