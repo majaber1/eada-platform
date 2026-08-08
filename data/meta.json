@@ -5,8 +5,8 @@
     "reuse",
     "recycle"
   ],
-  "version": "0.2",
-  "status": "MVP prototype",
+  "version": "1.0.0",
+  "status": "Public interactive prototype",
   "note": "Demo opportunity data only",
   "modules": [
     "asset-assessment",
