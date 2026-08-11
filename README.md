@@ -31,6 +31,12 @@ npm test
 
 Open <http://localhost:8080>. The public site deploys to GitHub Pages through the included workflow.
 
+## Architecture and localization
+
+The application is dependency-free static HTML, CSS, and JavaScript. Arabic and English share the same semantic markup; `lang` and `dir` switch at document level, while CSS logical properties preserve RTL/LTR behavior. Theme and language are device preferences. Product records remain device-local and are not authoritative production data.
+
+No environment variables are currently required. See [`.env.example`](.env.example), [`docs/PRODUCT_AUDIT.md`](docs/PRODUCT_AUDIT.md), and [`docs/RELEASE_REPORT.md`](docs/RELEASE_REPORT.md).
+
 ## License
 
 MIT
