@@ -37,10 +37,13 @@
     <div class="top-actions">
       <button class="ghost menu-toggle" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" onclick="toggleMenu()"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
       <button class="ghost" id="langBtn" type="button" onclick="toggleLang()" aria-label="Switch language">EN</button>
+      <button class="ghost icon-button" id="themeBtn" type="button" onclick="toggleTheme()" aria-label="Toggle color theme">◐</button>
       <button class="account-chip" id="accountBtn" type="button" onclick="go('operations')" aria-label="Open organization workspace">وضع العرض</button>
       <button class="primary small" onclick="go('assess')" data-i18n="startNow">ابدأ الآن</button>
     </div>
   </header>
+
+  <div class="context-bar" id="contextBar" aria-live="polite"><span id="breadcrumbText">EADA</span><span class="connection-state" id="connectionState">● Online</span></div>
 
   <main id="mainContent" tabindex="-1">
     <section id="home" class="page active">

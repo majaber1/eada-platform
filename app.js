@@ -93,6 +93,8 @@ function applyLang(){
   renderOperations();
 }
 function toggleLang(){lang = lang==="ar"?"en":"ar";localStorage.setItem("eada_lang",lang);applyLang()}
+function applyTheme(){const theme=localStorage.getItem("eada_theme")||"light";document.documentElement.dataset.theme=theme;document.getElementById("themeBtn").textContent=theme==="dark"?"☀":"◐"}
+function toggleTheme(){const next=document.documentElement.dataset.theme==="dark"?"light":"dark";localStorage.setItem("eada_theme",next);applyTheme()}
 function toggleMenu(){
   const nav=document.getElementById("mainNav"),btn=document.getElementById("menuBtn");
   const open=nav.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));
@@ -104,6 +106,8 @@ function go(id){
   document.querySelectorAll(".nav button").forEach(button=>button.classList.toggle("active",button.getAttribute("onclick")?.includes(`'${id}'`)));
   target.classList.add("active");target.removeAttribute("aria-hidden");closeMenu();
   window.history.replaceState(null,"",`#${id}`);window.scrollTo({top:0,behavior:"smooth"});
+  document.body.classList.toggle("workspace-shell",id==="dashboard"||id==="operations");
+  const crumb=document.getElementById("breadcrumbText");if(crumb)crumb.textContent=`EADA / ${document.querySelector(`.nav button[onclick*="'${id}'"]`)?.textContent||id}`;
   if(id==="dashboard")renderDashboard();
   if(id==="operations")renderOperations();target.focus({preventScroll:true});
 }
@@ -414,8 +418,12 @@ function renderOperations(){
 }
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 window.addEventListener("error",event=>{const errors=safeRead("eada_client_errors",[]);errors.unshift({message:event.message,date:new Date().toISOString()});localStorage.setItem("eada_client_errors",JSON.stringify(errors.slice(0,20)))});
+function updateConnectionState(){const el=document.getElementById("connectionState");if(!el)return;el.textContent=navigator.onLine?(lang==="ar"?"● متصل":"● Online"):(lang==="ar"?"● غير متصل":"● Offline");el.classList.toggle("offline",!navigator.onLine)}
+window.addEventListener("online",updateConnectionState);window.addEventListener("offline",updateConnectionState);
 
 applyLang();
+applyTheme();
+updateConnectionState();
 renderMarket();
 renderDashboard();
 renderOperations();
