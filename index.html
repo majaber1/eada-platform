@@ -8,6 +8,8 @@
   <meta property="og:title" content="إعادة | EADA" />
   <meta property="og:description" content="Interactive circular-economy decision prototype for surplus assets and scrap." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://majaber1.github.io/eada-platform/" />
+  <link rel="canonical" href="https://majaber1.github.io/eada-platform/" />
   <title>إعادة | EADA Circular Economy Prototype</title>
   <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   <link rel="manifest" href="manifest.webmanifest" />
@@ -31,10 +33,12 @@
       <button onclick="go('scrap')" data-i18n="navScrap">Scrap AI</button>
       <button onclick="go('market')" data-i18n="navMarket">سوق الفرص</button>
       <button onclick="go('dashboard')" data-i18n="navDashboard">لوحة التحكم</button>
+      <button onclick="go('operations')" data-i18n="navOperations">العمليات</button>
     </nav>
     <div class="top-actions">
       <button class="ghost menu-toggle" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" onclick="toggleMenu()"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
       <button class="ghost" id="langBtn" type="button" onclick="toggleLang()" aria-label="Switch language">EN</button>
+      <button class="account-chip" id="accountBtn" type="button" onclick="go('operations')" aria-label="Open organization workspace">وضع العرض</button>
       <button class="primary small" onclick="go('assess')" data-i18n="startNow">ابدأ الآن</button>
     </div>
   </header>
@@ -301,11 +305,13 @@
     </section>
 
     <section id="dashboard" class="page shell section">
-      <div class="section-head">
+      <div class="section-head dashboard-head">
         <div>
           <div class="eyebrow" data-i18n="dashboard">لوحة التحكم</div>
           <h2 data-i18n="valueOverview">نظرة على القيمة المستردة</h2>
+          <p data-i18n="dashboardIntro">ملخص تنفيذي للتقييمات، الحالات، الامتثال والجاهزية التشغيلية على هذا الجهاز.</p>
         </div>
+        <div class="dashboard-actions"><button class="secondary" onclick="go('assess')" data-i18n="newAssessment">تقييم جديد</button><button class="primary" onclick="go('operations')" data-i18n="openOperations">فتح العمليات</button></div>
       </div>
 
       <div class="stats">
@@ -329,6 +335,76 @@
           <div id="routeBars" class="bars"></div>
         </div>
       </div>
+
+      <div class="dashboard-kpis">
+        <article class="panel kpi-card"><span data-i18n="activeCases">الحالات النشطة</span><strong id="dashboardPipeline">0</strong><small data-i18n="acrossWorkflow">عبر مسار العمل</small></article>
+        <article class="panel kpi-card"><span data-i18n="complianceProgress">تقدم الامتثال</span><strong id="dashboardCompliance">0%</strong><small data-i18n="checksCompleted">من الفحوص المكتملة</small></article>
+        <article class="panel kpi-card"><span data-i18n="readinessLabel">جاهزية النموذج</span><strong id="dashboardReadiness">50%</strong><small data-i18n="localCapabilities">القدرات المحلية المتاحة</small></article>
+      </div>
+
+      <div class="dashboard-grid dashboard-lower">
+        <article class="panel">
+          <div class="panel-title"><h3 data-i18n="caseDistribution">توزيع الحالات</h3><button class="ghost" onclick="go('operations')" data-i18n="manage">إدارة</button></div>
+          <div id="caseStatusBars" class="bars"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-title"><h3 data-i18n="recentActivity">النشاط الأخير</h3><span class="status-pill ok" data-i18n="auditEnabled">التدقيق مفعّل</span></div>
+          <div id="dashboardActivity" class="audit-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="operations" class="page shell section" aria-labelledby="operationsTitle">
+      <div class="section-head operations-head">
+        <div>
+          <div class="eyebrow" data-i18n="operationsEyebrow">مساحة تشغيل النموذج</div>
+          <h2 id="operationsTitle" data-i18n="operationsTitle">حوّل التقييم إلى مسار عمل قابل للتتبع</h2>
+          <p data-i18n="operationsIntro">أدوات محلية شفافة للهوية، المتابعة، الامتثال، التدقيق والتصدير. لا تمثل حسابًا آمنًا أو معاملة حقيقية.</p>
+        </div>
+        <span class="local-badge" data-i18n="localOnly">محلي على هذا الجهاز</span>
+      </div>
+
+      <div class="ops-grid">
+        <article class="panel identity-panel">
+          <div class="panel-title"><h3 data-i18n="organizationProfile">ملف الجهة</h3><span id="sessionState" class="status-pill neutral">عرض</span></div>
+          <form id="profileForm" onsubmit="saveProfile(event)">
+            <label><span data-i18n="organizationName">اسم الجهة</span><input id="orgName" maxlength="100" autocomplete="organization" placeholder="EADA Demo Company" /></label>
+            <div class="two-col">
+              <label><span data-i18n="contactName">اسم المسؤول</span><input id="contactName" maxlength="80" autocomplete="name" /></label>
+              <label><span data-i18n="businessEmail">البريد المهني</span><input id="businessEmail" type="email" maxlength="120" autocomplete="email" /></label>
+            </div>
+            <label><span data-i18n="organizationRole">الدور</span><select id="orgRole"><option value="owner">Owner</option><option value="operator">Operator</option><option value="reviewer">Compliance reviewer</option></select></label>
+            <button class="primary" type="submit" data-i18n="saveLocalProfile">حفظ جلسة العرض</button>
+          </form>
+          <p class="micro-note" data-i18n="identityDisclaimer">هذه هوية عرض محفوظة في المتصفح وليست مصادقة آمنة. الربط الإنتاجي يحتاج مزود هوية وخادمًا.</p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-title"><h3 data-i18n="productionReadiness">جاهزية الإنتاج</h3><strong id="readinessScore">0%</strong></div>
+          <div id="readinessList" class="readiness-list"></div>
+        </article>
+      </div>
+
+      <div class="ops-grid wide-left">
+        <article class="panel">
+          <div class="panel-title"><h3 data-i18n="dealPipeline">مسار الحالات والمعاملات</h3><button class="ghost" type="button" onclick="seedPipelineFromAssessments()" data-i18n="syncAssessments">مزامنة التقييمات</button></div>
+          <p class="micro-note" data-i18n="pipelineDisclaimer">المعاملات هنا مسودات تشغيلية فقط؛ لا يتم إرسال عروض أو أموال أو بيانات إلى طرف خارجي.</p>
+          <div id="pipelineList" class="pipeline-list"></div>
+        </article>
+
+        <article class="panel compliance-panel">
+          <h3 data-i18n="complianceReview">مراجعة الامتثال</h3>
+          <div id="complianceChecklist" class="checklist"></div>
+          <label><span data-i18n="evidenceReference">مرجع المستند / الدليل</span><input id="evidenceReference" maxlength="160" placeholder="Invoice, inspection report, permit…" /></label>
+          <button class="secondary" type="button" onclick="saveCompliance()" data-i18n="saveReview">حفظ المراجعة</button>
+        </article>
+      </div>
+
+      <div class="ops-grid thirds">
+        <article class="panel"><h3 data-i18n="auditTrail">سجل التدقيق</h3><div id="auditList" class="audit-list"></div></article>
+        <article class="panel"><h3 data-i18n="dataControls">البيانات والخصوصية</h3><p class="micro-note" data-i18n="dataControlsDesc">صدّر بيانات النموذج أو احذفها نهائيًا من هذا المتصفح.</p><div class="stack-actions"><button class="secondary" onclick="exportWorkspace()" data-i18n="exportData">تصدير JSON</button><button class="ghost danger" onclick="deleteWorkspace()" data-i18n="deleteLocalData">حذف البيانات المحلية</button></div></article>
+        <article class="panel"><h3 data-i18n="serviceHealth">صحة الخدمة</h3><div id="healthList" class="health-list"></div><button class="secondary" onclick="prepareContact()" data-i18n="prepareContact">إعداد طلب تواصل</button></article>
+      </div>
     </section>
   </main>
 
@@ -339,8 +415,8 @@
         <p data-i18n="footerText">Turn Surplus Into Value — منصة سعودية لتحويل الفائض إلى قيمة.</p>
       </div>
       <div>
-        <strong data-i18n="mvpLabel">نموذج عام v1.0</strong>
-        <p data-i18n="mvpText">واجهة عملية + محرك تقييم + سوق فرص + لوحة تحكم محلية.</p>
+        <strong data-i18n="mvpLabel">نموذج عام v1.1</strong>
+        <p data-i18n="mvpText">واجهة عملية + محرك تقييم + سوق فرص + عمليات وامتثال محليان.</p>
       </div>
     </div>
   </footer>

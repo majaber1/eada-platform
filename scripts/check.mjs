@@ -7,6 +7,12 @@ const html = await readFile("index.html", "utf8");
 for (const marker of ["<html lang=", "meta name=\"description\"", "id=\"mainContent\"", "aria-live=\"polite\"", "manifest.webmanifest"]) {
   if (!html.includes(marker)) throw new Error(`Missing release marker: ${marker}`);
 }
+for (const capability of ["id=\"operations\"", "id=\"profileForm\"", "id=\"pipelineList\"", "id=\"complianceChecklist\"", "id=\"auditList\""]) {
+  if (!html.includes(capability)) throw new Error(`Missing operations capability: ${capability}`);
+}
+for (const dashboardMarker of ["id=\"dashboardPipeline\"", "id=\"dashboardCompliance\"", "id=\"caseStatusBars\"", "id=\"dashboardActivity\""]) {
+  if (!html.includes(dashboardMarker)) throw new Error(`Missing dashboard capability: ${dashboardMarker}`);
+}
 const syntax = spawnSync(process.execPath, ["--check", "app.js"], { stdio: "inherit" });
 if (syntax.status !== 0) process.exit(syntax.status ?? 1);
 JSON.parse(await readFile("manifest.webmanifest", "utf8"));
