@@ -3,7 +3,7 @@ const translations = {
     skipContent:"انتقل إلى المحتوى",
     demoMarket:"بيانات السوق المعروضة أمثلة توضيحية وليست عروضًا حقيقية.",
     brandValueLabel:"قيمة قابلة للاسترداد",scenarioSignal:"إشارة سيناريو",bestRouteLabel:"المسار الأنسب",brandPromise:"من الفائض إلى قيمة قابلة للقياس",brandClarity:"وضوح القرار",brandTrust:"ثقة البيانات",brandMomentum:"حركة القيمة",
-    navHome:"الرئيسية",navAssess:"قيّم أصلًا",navScrap:"Scrap AI",navMarket:"سوق الفرص",navDashboard:"لوحة التحكم",navOperations:"العمليات",startNow:"ابدأ الآن",tryScrap:"جرّب Scrap AI",
+    navHome:"الرئيسية",navAssess:"قيّم أصلًا",navMarket:"سوق الفرص",navDashboard:"لوحة التحكم",navOperations:"العمليات",startNow:"ابدأ الآن",
     eyebrow:"منصة الاقتصاد الدائري والتجارة الذكية",heroTitle:'حوّل الفائض والمخزون والأصول إلى <span>قيمة جديدة</span>',
     heroText:"منصة سعودية ذكية تساعد الشركات والجهات على اختيار أفضل مسار: إعادة تصدير، إعادة بيع، إعادة توظيف، أو إعادة تدوير — بناءً على الربحية، الامتثال، السوق، واللوجستيات.",
     assessAsset:"قيّم أصلًا أو مخزونًا",browseOpp:"استكشف الفرص",paths:"مسارات قيمة",smartEngine:"محرك قرار ذكي",bilingual:"ثنائي اللغة",
@@ -26,7 +26,7 @@ const translations = {
     skipContent:"Skip to content",
     demoMarket:"Marketplace data is illustrative and does not represent live listings.",
     brandValueLabel:"Recoverable value",scenarioSignal:"Scenario signal",bestRouteLabel:"Best-fit route",brandPromise:"From surplus to measurable value",brandClarity:"Decision clarity",brandTrust:"Data confidence",brandMomentum:"Value in motion",
-    navHome:"Home",navAssess:"Assess Asset",navScrap:"Scrap AI",navMarket:"Opportunity Market",navDashboard:"Dashboard",navOperations:"Operations",startNow:"Get Started",tryScrap:"Try Scrap AI",
+    navHome:"Home",navAssess:"Assess Asset",navMarket:"Opportunity Market",navDashboard:"Dashboard",navOperations:"Operations",startNow:"Get Started",
     eyebrow:"Circular Economy & Smart Trade Platform",heroTitle:'Turn surplus, inventory and assets into <span>new value</span>',
     heroText:"A Saudi smart platform that helps organizations choose the best route: re-export, resale, redeployment, or recycling — based on profitability, compliance, market fit and logistics.",
     assessAsset:"Assess an asset or inventory",browseOpp:"Explore Opportunities",paths:"Value routes",smartEngine:"Smart decision engine",bilingual:"Bilingual",
@@ -202,8 +202,6 @@ function renderDashboard(){
   const counts={reexport:0,resale:0,reuse:0,recycle:0};h.forEach(x=>counts[x.best]++);
   const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
   document.getElementById("statAssess").textContent=h.length;
-  const scrapH=JSON.parse(localStorage.getItem("eada_scrap_history")||"[]");
-  const scrapStat=document.getElementById("statScrap"); if(scrapStat) scrapStat.textContent=scrapH.length;
   document.getElementById("statValue").textContent=(lang==="ar"?total.toLocaleString("ar-SA")+" ر.س":"SAR "+total.toLocaleString("en-US"));
   document.getElementById("statRecovery").textContent=(lang==="ar"?recovery.toLocaleString("ar-SA")+" ر.س":"SAR "+recovery.toLocaleString("en-US"));
   document.getElementById("statRoute").textContent=h.length?routeNames[lang][top[0]]:"—";
@@ -221,6 +219,7 @@ function renderDashboard(){
   const activity=document.getElementById("dashboardActivity");if(activity)activity.innerHTML=audit.length?audit.slice(0,6).map(x=>`<div class="audit-row"><span>${escapeHtml(x.action)}</span><small>${new Date(x.date).toLocaleString(lang==="ar"?"ar-SA":"en-US")}</small></div>`).join(""):`<div class="compact-empty">${lang==="ar"?"سيظهر نشاط العمليات هنا.":"Operations activity will appear here."}</div>`;
 }
 
+/* Scrap AI implementation moved to https://github.com/majaber1/scrap-ai
 let scrapImageData = null;
 
 const scrapCatalog = {
@@ -345,6 +344,7 @@ function createScrapListing(material,weight,value){
   localStorage.setItem("eada_scrap_listings",JSON.stringify(listings));
   showToast(lang==="ar"?"تم إنشاء مسودة عرض سكراب داخل الـ MVP.":"Scrap listing draft created in the MVP.");
 }
+*/
 
 function showToast(msg){
   const region=document.getElementById("toastRegion");region.textContent="";
@@ -352,7 +352,7 @@ function showToast(msg){
   setTimeout(()=>t.remove(),3000);
 }
 
-const workspaceKeys=["eada_profile","eada_pipeline","eada_compliance","eada_audit","eada_history","eada_scrap_history","eada_scrap_listings"];
+const workspaceKeys=["eada_profile","eada_pipeline","eada_compliance","eada_audit","eada_history"];
 const readinessItems=[
   {n:1,ar:"هوية الجهة",en:"Organization identity",state:"local"},{n:2,ar:"خلفية وقاعدة بيانات آمنة",en:"Secure backend & database",state:"external"},
   {n:3,ar:"تأهيل مشترين ومعالجين",en:"Buyer & recycler onboarding",state:"external"},{n:4,ar:"رؤية حاسوبية موثقة",en:"Verified computer vision",state:"external"},
@@ -381,7 +381,6 @@ function saveProfile(e){
 function seedPipelineFromAssessments(){
   const pipeline=safeRead("eada_pipeline",[]),existing=new Set(pipeline.map(x=>x.sourceDate));
   getAssessmentHistory().forEach((x,i)=>{if(!existing.has(x.date))pipeline.push({id:`CASE-${String(pipeline.length+i+1).padStart(4,"0")}`,name:x.name,value:x.recoverable,route:x.best,status:"review",sourceDate:x.date,updatedAt:new Date().toISOString()})});
-  safeRead("eada_scrap_listings",[]).forEach(x=>{if(!pipeline.some(p=>p.id===x.id))pipeline.push({id:x.id,name:scrapCatalog[x.material]?.[lang]||x.material,value:x.value,route:"recycle",status:"draft",sourceDate:x.date,updatedAt:new Date().toISOString()})});
   localStorage.setItem("eada_pipeline",JSON.stringify(pipeline));addAudit("pipeline.synced",String(pipeline.length));renderOperations();
 }
 function updateCase(id,status){const list=safeRead("eada_pipeline",[]),item=list.find(x=>x.id===id);if(!item)return;item.status=status;item.updatedAt=new Date().toISOString();localStorage.setItem("eada_pipeline",JSON.stringify(list));addAudit("case.status",`${id}: ${status}`);renderOperations()}
