@@ -100,12 +100,12 @@ function toggleMenu(){
   const open=nav.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));
 }
 function closeMenu(){document.getElementById("mainNav").classList.remove("open");document.getElementById("menuBtn").setAttribute("aria-expanded","false")}
-function go(id){
+function go(id,{updateHistory=true}={}){
   const target=document.getElementById(id);if(!target)return;
   document.querySelectorAll(".page").forEach(p=>{p.classList.remove("active");p.setAttribute("aria-hidden","true")});
   document.querySelectorAll(".nav button").forEach(button=>button.classList.toggle("active",button.getAttribute("onclick")?.includes(`'${id}'`)));
   target.classList.add("active");target.removeAttribute("aria-hidden");closeMenu();
-  window.history.replaceState(null,"",`#${id}`);window.scrollTo({top:0,behavior:"smooth"});
+  if(updateHistory && location.hash!==`#${id}`)window.history.pushState({page:id},"",`#${id}`);window.scrollTo({top:0,behavior:"smooth"});
   document.body.classList.toggle("workspace-shell",id==="dashboard"||id==="operations");
   const crumb=document.getElementById("breadcrumbText");if(crumb)crumb.textContent=`EADA / ${document.querySelector(`.nav button[onclick*="'${id}'"]`)?.textContent||id}`;
   if(id==="dashboard")renderDashboard();
@@ -420,6 +420,7 @@ function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":
 window.addEventListener("error",event=>{const errors=safeRead("eada_client_errors",[]);errors.unshift({message:event.message,date:new Date().toISOString()});localStorage.setItem("eada_client_errors",JSON.stringify(errors.slice(0,20)))});
 function updateConnectionState(){const el=document.getElementById("connectionState");if(!el)return;el.textContent=navigator.onLine?(lang==="ar"?"● متصل":"● Online"):(lang==="ar"?"● غير متصل":"● Offline");el.classList.toggle("offline",!navigator.onLine)}
 window.addEventListener("online",updateConnectionState);window.addEventListener("offline",updateConnectionState);
+window.addEventListener("popstate",()=>go(location.hash.slice(1)&&document.getElementById(location.hash.slice(1))?location.hash.slice(1):"home",{updateHistory:false}));
 
 applyLang();
 applyTheme();
@@ -427,4 +428,4 @@ updateConnectionState();
 renderMarket();
 renderDashboard();
 renderOperations();
-go(location.hash.slice(1)&&document.getElementById(location.hash.slice(1))?location.hash.slice(1):"home");
+go(location.hash.slice(1)&&document.getElementById(location.hash.slice(1))?location.hash.slice(1):"home",{updateHistory:false});
