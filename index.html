@@ -6,7 +6,7 @@
   <meta name="description" content="إعادة — نموذج تفاعلي ثنائي اللغة لتقييم مسارات إعادة التصدير والبيع والتوظيف والتدوير." />
   <meta name="theme-color" content="#0d5b45" />
   <meta property="og:title" content="إعادة | EADA" />
-  <meta property="og:description" content="Interactive circular-economy decision prototype for surplus assets and scrap." />
+  <meta property="og:description" content="Interactive circular-economy decision platform for surplus assets and inventory." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://majaber1.github.io/eada-platform/" />
   <link rel="canonical" href="https://majaber1.github.io/eada-platform/" />
@@ -30,7 +30,6 @@
     <nav class="nav" id="mainNav" aria-label="Primary navigation">
       <button onclick="go('home')" data-i18n="navHome">الرئيسية</button>
       <button onclick="go('assess')" data-i18n="navAssess">قيّم أصلًا</button>
-      <button onclick="go('scrap')" data-i18n="navScrap">Scrap AI</button>
       <button onclick="go('market')" data-i18n="navMarket">سوق الفرص</button>
       <button onclick="go('dashboard')" data-i18n="navDashboard">لوحة التحكم</button>
       <button onclick="go('operations')" data-i18n="navOperations">العمليات</button>
@@ -53,7 +52,6 @@
           <div class="hero-actions">
             <button class="primary" onclick="go('assess')" data-i18n="assessAsset">قيّم أصلًا أو مخزونًا</button>
             <button class="secondary" onclick="go('market')" data-i18n="browseOpp">استكشف الفرص</button>
-            <button class="secondary" onclick="go('scrap')" data-i18n="tryScrap">جرّب Scrap AI</button>
           </div>
           <div class="trust-row">
             <div><strong>4</strong><span data-i18n="paths">مسارات قيمة</span></div>
@@ -200,6 +198,8 @@
     </section>
 
 
+    <!-- Scrap AI is now maintained as an independent product repository. -->
+    <!--
     <section id="scrap" class="page shell section">
       <div class="section-head scrap-head">
         <div>
@@ -286,6 +286,7 @@
         </div>
       </div>
     </section>
+    -->
 
     <section id="market" class="page shell section">
       <div class="section-head split">
@@ -319,7 +320,6 @@
         <div class="stat"><span data-i18n="estimatedValue">القيمة المقدرة</span><strong id="statValue">0 ر.س</strong><small data-i18n="evaluatedAssets">للأصول المقيمة</small></div>
         <div class="stat"><span data-i18n="topRoute">المسار الأكثر توصية</span><strong id="statRoute">—</strong><small data-i18n="decisionEngine">من محرك القرار</small></div>
         <div class="stat"><span data-i18n="savedWaste">قيمة قابلة للاسترداد</span><strong id="statRecovery">0 ر.س</strong><small data-i18n="scenarioEstimate">تقدير سيناريو MVP</small></div>
-        <div class="stat"><span data-i18n="scrapAnalyses">تحليلات Scrap AI</span><strong id="statScrap">0</strong><small data-i18n="thisDevice">على هذا الجهاز</small></div>
       </div>
 
       <div class="dashboard-grid">
