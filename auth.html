@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EADA | تسجيل الدخول</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#f8fafc);font-family:system-ui,sans-serif;padding:20px}
+.auth-card{background:var(--surface,#fff);border:1px solid var(--border,#e2e8f0);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+.auth-card h1{font-size:1.5rem;font-weight:700;text-align:center;margin-bottom:8px}
+.auth-card .sub{font-size:0.85rem;color:var(--muted,#64748b);text-align:center;margin-bottom:24px}
+.auth-tabs{display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border,#e2e8f0);border-radius:10px;overflow:hidden}
+.auth-tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.82rem;font-weight:600;background:transparent;border:none;color:var(--muted,#64748b);transition:all .2s;font-family:inherit}
+.auth-tab.active{background:var(--accent,#2563eb);color:#fff}
+.auth-label{display:block;font-size:0.75rem;color:var(--muted,#64748b);margin-bottom:6px}
+.auth-input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border,#e2e8f0);background:var(--surface2,#f8fafc);font-size:0.9rem;margin-bottom:16px;outline:none;font-family:inherit}
+.auth-input:focus{border-color:var(--accent,#2563eb)}
+.auth-btn{width:100%;padding:12px;border-radius:8px;border:none;background:var(--accent,#2563eb);color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit}
+.auth-btn:hover{opacity:.9}
+.auth-error{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:8px;padding:8px 12px;margin-bottom:16px;color:#dc2626;font-size:0.8rem;display:none}
+.auth-success{background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:8px;padding:8px 12px;margin-bottom:16px;color:#059669;font-size:0.8rem;display:none}
+.auth-footer{text-align:center;margin-top:16px;font-size:0.78rem;color:var(--muted,#64748b)}
+.auth-footer a{color:var(--accent,#2563eb);text-decoration:none}
+#register-fields{display:none}
+</style>
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>إعادة | EADA</h1>
+    <p class="sub">منصة تقييم الاقتصاد الدائري</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="showTab('login')" id="tab-login">تسجيل الدخول</button>
+      <button class="auth-tab" onclick="showTab('register')" id="tab-register">إنشاء حساب</button>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+    <div id="auth-success" class="auth-success"></div>
+    <form onsubmit="handleAuth(event)">
+      <div id="register-fields">
+        <label class="auth-label">الاسم</label>
+        <input class="auth-input" id="auth-name" placeholder="محمد">
+        <label class="auth-label">المنظمة</label>
+        <input class="auth-input" id="auth-org" placeholder="اسم الشركة">
+      </div>
+      <label class="auth-label">البريد الإلكتروني</label>
+      <input class="auth-input" type="email" id="auth-email" required placeholder="email@example.com" dir="ltr">
+      <label class="auth-label">كلمة المرور</label>
+      <input class="auth-input" type="password" id="auth-pass" required placeholder="********" dir="ltr">
+      <button type="submit" class="auth-btn" id="auth-submit">دخول</button>
+    </form>
+    <div class="auth-footer">
+      <a href="index.html">← العودة للرئيسية</a>
+    </div>
+  </div>
+</div>
+<script>
+let mode = 'login';
+function showTab(m) {
+  mode = m;
+  document.getElementById('tab-login').classList.toggle('active', m === 'login');
+  document.getElementById('tab-register').classList.toggle('active', m === 'register');
+  document.getElementById('register-fields').style.display = m === 'register' ? 'block' : 'none';
+  document.getElementById('auth-submit').textContent = m === 'login' ? 'دخول' : 'إنشاء حساب';
+  hide('auth-error'); hide('auth-success');
+}
+function show(id, msg) { const el = document.getElementById(id); el.textContent = msg; el.style.display = 'block'; }
+function hide(id) { document.getElementById(id).style.display = 'none'; }
+
+async function hashPw(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function getUsers() { return JSON.parse(localStorage.getItem('eada_users') || '{}'); }
+function saveUsers(u) { localStorage.setItem('eada_users', JSON.stringify(u)); }
+
+async function handleAuth(e) {
+  e.preventDefault();
+  hide('auth-error'); hide('auth-success');
+  const email = document.getElementById('auth-email').value.trim().toLowerCase();
+  const pass = document.getElementById('auth-pass').value;
+  if (!email || !pass) { show('auth-error', 'جميع الحقول مطلوبة'); return; }
+  const hash = await hashPw(pass);
+  const users = getUsers();
+  if (mode === 'register') {
+    const name = document.getElementById('auth-name').value.trim();
+    const org = document.getElementById('auth-org').value.trim();
+    if (!name) { show('auth-error', 'الاسم مطلوب'); return; }
+    if (pass.length < 8) { show('auth-error', 'كلمة المرور 8 أحرف على الأقل'); return; }
+    if (users[email]) { show('auth-error', 'البريد مسجل مسبقاً'); return; }
+    users[email] = { name, org, hash, created: new Date().toISOString() };
+    saveUsers(users);
+    show('auth-success', 'تم إنشاء الحساب بنجاح');
+    setTimeout(() => showTab('login'), 1500);
+  } else {
+    const user = users[email];
+    if (!user || user.hash !== hash) { show('auth-error', 'بيانات غير صحيحة'); return; }
+    sessionStorage.setItem('eada_user', JSON.stringify({ email, name: user.name, org: user.org }));
+    window.location.href = 'index.html';
+  }
+}
+
+if (sessionStorage.getItem('eada_user')) window.location.href = 'index.html';
+</script>
+</body>
+</html>
