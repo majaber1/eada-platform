@@ -36,6 +36,7 @@
     </nav>
     <div class="top-actions">
       <button class="ghost menu-toggle" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" onclick="toggleMenu()"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
+      <a href="auth.html" class="ghost" id="authLink" data-i18n="navLogin">تسجيل الدخول</a>
       <button class="ghost" id="langBtn" type="button" onclick="toggleLang()" aria-label="Switch language">EN</button>
       <button class="ghost icon-button" id="themeBtn" type="button" onclick="toggleTheme()" aria-label="Toggle color theme">◐</button>
       <button class="account-chip" id="accountBtn" type="button" onclick="go('operations')" aria-label="Open organization workspace">وضع العرض</button>
@@ -204,90 +205,7 @@
     <!-- Scrap AI is now maintained as an independent product repository. -->
     <!--
     <section id="scrap" class="page shell section">
-      <div class="section-head scrap-head">
-        <div>
-          <div class="eyebrow" data-i18n="scrapEyebrow">EADA Scrap AI</div>
-          <h2 data-i18n="scrapTitle">صوّر السكراب… واعرف قيمته وأفضل مسار له</h2>
-          <p data-i18n="scrapIntro">ارفع صورة، أدخل الوزن التقريبي وبعض المعلومات، وسيقدّم محرك MVP تقديرًا أوليًا لنوع المادة، النقاء، القيمة، وخيار البيع أو التدوير أو إعادة التصدير.</p>
-        </div>
-        <span class="beta-badge">BETA MVP</span>
-      </div>
-
-      <div class="scrap-layout">
-        <div class="scrap-upload-card">
-          <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Upload scrap image" onclick="document.getElementById('scrapImage').click()" onkeydown="handleDropKey(event)">
-            <input id="scrapImage" type="file" accept="image/*" hidden onchange="handleScrapImage(event)" />
-            <div id="scrapPreviewWrap" class="scrap-preview-wrap">
-              <div class="upload-icon">⌁</div>
-              <h3 data-i18n="uploadScrap">ارفع صورة السكراب</h3>
-              <p data-i18n="uploadHint">JPG / PNG — صورة واحدة كافية للنسخة التجريبية</p>
-              <button type="button" class="secondary" data-i18n="chooseImage">اختر صورة</button>
-            </div>
-          </div>
-
-          <div class="scrap-form-grid">
-            <label><span data-i18n="materialHint">نوع المادة إن كنت تعرفه</span>
-              <select id="scrapMaterial">
-                <option value="auto" data-i18n="autoDetect">دع المحرك يقدّر</option>
-                <option value="copper" data-i18n="copper">نحاس / كيابل</option>
-                <option value="aluminum" data-i18n="aluminum">ألمنيوم</option>
-                <option value="steel" data-i18n="steel">حديد / فولاذ</option>
-                <option value="ewaste" data-i18n="ewaste">نفايات إلكترونية</option>
-                <option value="battery" data-i18n="battery">بطاريات</option>
-                <option value="mixed" data-i18n="mixed">سكراب مختلط</option>
-              </select>
-            </label>
-            <label><span data-i18n="weightKg">الوزن التقريبي (كجم)</span>
-              <input id="scrapWeight" type="number" min="1" max="100000000" value="500" required inputmode="decimal" />
-            </label>
-            <label><span data-i18n="cleanliness">حالة الفرز / النظافة</span>
-              <select id="scrapClean">
-                <option value="clean" data-i18n="clean">مفروز ونظيف</option>
-                <option value="medium" selected data-i18n="medium">متوسط</option>
-                <option value="dirty" data-i18n="dirty">مختلط / ملوث</option>
-              </select>
-            </label>
-            <label><span data-i18n="scrapGoal">الهدف</span>
-              <select id="scrapGoal">
-                <option value="sell" data-i18n="sellFast">بيع سريع</option>
-                <option value="maximize" data-i18n="maximize">تعظيم القيمة</option>
-                <option value="export" data-i18n="exportRoute">بحث فرصة تصدير</option>
-                <option value="recycle" data-i18n="recycleCompliant">تدوير ملتزم</option>
-              </select>
-            </label>
-          </div>
-          <button class="primary full" type="button" onclick="analyzeScrap()" data-i18n="analyzeScrap">حلّل السكراب</button>
-          <p class="micro-note" data-i18n="scrapDisclaimer">مهم: هذا نموذج MVP توضيحي وليس فحصًا مخبريًا أو تسعيرًا ملزمًا. الإنتاج الحقيقي يحتاج نموذج رؤية حاسوبية وبيانات أسعار ومشترين محدثة.</p>
-        </div>
-
-        <div class="scrap-result-card" id="scrapResult" aria-live="polite" aria-atomic="true">
-          <div class="empty-state">
-            <img class="pulse-logo image-logo" src="assets/logo-mark.svg" alt="" width="72" height="72" />
-            <h3 data-i18n="scrapWaiting">بانتظار صورة وبيانات السكراب</h3>
-            <p data-i18n="scrapWaitingDesc">سنحوّل المدخلات إلى تقدير نوع، نقاء، قيمة، وتوصية تشغيلية.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section scrap-how">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow" data-i18n="scrapFlowLabel">المسار المستهدف في النسخة الإنتاجية</div>
-            <h2 data-i18n="scrapFlowTitle">من الصورة إلى صفقة</h2>
-          </div>
-        </div>
-        <div class="scrap-flow">
-          <div><strong>1</strong><span data-i18n="sf1">صورة / فيديو</span></div>
-          <i>→</i>
-          <div><strong>2</strong><span data-i18n="sf2">تصنيف المادة</span></div>
-          <i>→</i>
-          <div><strong>3</strong><span data-i18n="sf3">Grade & Purity</span></div>
-          <i>→</i>
-          <div><strong>4</strong><span data-i18n="sf4">سعر وقيمة</span></div>
-          <i>→</i>
-          <div><strong>5</strong><span data-i18n="sf5">بيع / مزاد / تدوير / تصدير</span></div>
-        </div>
-      </div>
+      ... scrap section commented out ...
     </section>
     -->
 
